@@ -1,0 +1,56 @@
+## Introduction to Ruby
+
+my_num = 25    
+my_boolean = true    
+my_string = "Ruby"    
+puts my_num
+puts my_boolean
+puts my_string
+
+
+my_num_2 = 80/4
+sum = 13 + 379
+product = 923 * 15
+quotient = 13209 / 17
+puts sum
+puts product
+puts quotient
+
+
+puts "What's up?"
+print "Oxnard Montalvo"
+
+
+puts "Josue Bravo".length
+puts "Josue".reverse
+puts "Josue".upcase
+puts "Josue".downcase
+name = "Josue".downcase.reverse.upcase
+puts name
+
+
+# I'm a full line comment!
+"Eric".length # I'm a comment, too!
+=begin
+I'm a comment!
+I don't need any # symbols.
+=end
+
+
+print "What's your first name?"
+first_name = gets.chomp
+first_name.capitalize!
+
+print "What's your last name?"
+last_name = gets.chomp
+last_name.capitalize!
+
+print "What's your city?"
+city = gets.chomp
+city.capitalize!
+
+print "What's your state or province?"
+province = gets.chomp
+province.upcase!
+
+puts "#{first_name} #{last_name} #{city} #{province}"

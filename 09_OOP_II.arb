@@ -1,0 +1,259 @@
+
+## Object-oriented Programming II
+
+class Person
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+  
+  public    # This method can be called from outside the class.
+  
+  def about_me
+    puts "I'm #{@name} and I'm #{@age} years old!"
+  end
+  
+  private   # This method can't!
+  
+  def bank_account_number
+    @account_number = 12345
+    puts "My bank account number is #{@account_number}."
+  end
+end
+
+eric = Person.new("Eric", 26)
+eric.about_me
+eric.bank_account_number
+
+
+class Person
+  attr_reader :name
+  #attr_writer :job
+  attr_accessor :job
+  
+  def initialize(name, job)
+    @name = name
+    @job = job
+  end
+end
+
+
+module Circle
+
+  PI = 3.141592653589793
+  
+  def Circle.area(radius)
+    PI * radius**2
+  end
+  
+  def Circle.circumference(radius)
+    2 * PI * radius
+  end
+end
+
+
+puts Circle::PI
+puts Math::PI
+
+
+require 'date'
+puts Date.today
+
+
+class Angle
+  include Math
+
+  attr_accessor :radians
+  
+  def initialize(radians)
+    @radians = radians
+  end
+  
+  def cosine
+    Math::cos(@radians)
+  end
+end
+
+acute = Angle.new(1)
+acute.cosine
+
+
+module Action
+  def jump
+    @distance = rand(4) + 2
+    puts "I jumped forward #{@distance} feet!"
+  end
+end
+
+class Rabbit
+  include Action
+  attr_reader :name
+  def initialize(name)
+    @name = name
+  end
+end
+
+class Cricket
+  include Action
+  attr_reader :name
+  def initialize(name)
+    @name = name
+  end
+end
+
+peter = Rabbit.new("Peter")
+jiminy = Cricket.new("Jiminy")
+
+peter.jump
+jiminy.jump
+
+
+module MartialArts
+  def swordsman
+    puts "I'm a swordsman."
+  end
+end
+
+class Ninja
+  include MartialArts
+  def initialize(clan)
+    @clan = clan
+  end
+end
+
+class Samurai
+  include MartialArts
+  def initialize(shogun)
+    @shogun = shogun
+  end
+end
+
+
+# ThePresent has a .now method that we'll extend to TheHereAnd
+
+module ThePresent
+  def now
+    puts "It's #{Time.new.hour > 12 ? Time.new.hour - 12 : Time.new.hour}:#{Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
+  end
+end
+
+class TheHereAnd
+  extend ThePresent
+end
+
+TheHereAnd.now
+
+
+class Application
+  attr_accessor :status
+  def initialize; end
+  # Add your method here!
+  public
+  def print_status
+    puts "All systems go!"
+  end
+
+  private 
+  def password
+    12345
+  end
+end
+
+module Languages
+  FAVE = "Javascript"
+end
+
+
+module Languages
+  FAVE = "Ruby"  # This is what you typed before, right? :D
+end
+
+class Master
+  include Languages
+  def initialize; end
+  def victory
+    puts FAVE
+  end
+end
+
+total = Master.new
+total.victory
+
+
+class Account
+  attr_reader :name, :balance
+  def initialize(name, balance=100)
+    @name = name
+    @balance = balance
+  end
+  
+  def display_balance(pin_number)
+    puts pin_number == pin ? "Balance: $#{@balance}." : pin_error
+  end
+  
+  def withdraw(pin_number, amount)
+    if pin_number == pin
+      @balance -= amount
+      puts "Withdrew #{amount}. New balance: $#{@balance}."
+    else
+      puts pin_error
+    end
+  end
+  
+  private
+  
+  def pin
+    @pin = 1234
+  end
+  
+  def pin_error
+    "Access denied: incorrect PIN."
+  end
+end
+
+my_account = Account.new("Eric", 1_000_000)
+my_account.withdraw(11, 500_000)
+my_account.display_balance(1234)
+my_account.withdraw(1234, 500_000)
+my_account.display_balance(1234)
+
+
+class Account
+  attr_reader :name
+  attr_reader :balance
+
+  def initialize(name, balance=100)
+      @name = name
+      @balance = balance
+  end
+
+  public
+  def display_balance(pin_number)
+    if pin_number == @pin 
+      puts "Balance: $#{@balance}."
+    else
+      puts pin_error
+    end
+  end
+
+  def withdraw(pin_number, amount)
+    if pin_number == @pin 
+      @balance -= amount
+      puts "Withdrew #{amount}. New balance: $#{@balance}."
+    else
+      puts pin_error
+    end
+  end
+
+
+  private
+  def pin
+    @pin = 1234
+  end
+
+  def pin_error
+    "Access denied: incorrect PIN."
+  end
+end
+
+checking_account = Account.new("Josue", "20_000")

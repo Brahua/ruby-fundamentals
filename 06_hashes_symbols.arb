@@ -1,0 +1,145 @@
+
+## Hashes and Symbols
+
+new_hash = { "one" => 1 }
+my_hash = Hash.new
+
+
+matz = { "First name" => "Yukihiro",
+  "Last name" => "Matsumoto",
+  "Age" => 47,
+  "Nationality" => "Japanese",
+  "Nickname" => "Matz"
+}
+matz.each do |key, value|
+  puts value
+end
+
+
+creatures = { "weasels" => 0,
+  "puppies" => 6,
+  "platypuses" => 3,
+  "canaries" => 1,
+  "Heffalumps" => 7,
+  "Tiggers" => 1
+}
+puts creatures["someProperty"]
+
+
+no_nil_hash = Hash.new("somevalue")
+
+
+menagerie = { :foxes => 2,
+  :giraffe => 1,
+  :weezards => 17,
+  :elves => 1,
+  :canaries => 4,
+  :ham => 1
+}
+
+
+puts "string".object_id
+puts "string".object_id
+puts :symbol.object_id
+puts :symbol.object_id
+
+my_new_symbol = :symbol
+
+
+symbol_hash = {
+  :one => 1,
+  :two => 2,   
+  :three => 3,
+}
+# > Ruby 1.9
+symbol_hash = {
+  one: 1,
+  two: 2,   
+  three: 3,
+}
+
+
+strings = ["HTML", "CSS", "JavaScript", "Python", "Ruby"]
+symbols = []
+strings.each do |s|
+  #symbols.push(s.to_sym) 
+  symbols.push(s.intern) 
+end
+print symbols
+
+
+require 'benchmark'
+string_AZ = Hash[("a".."z").to_a.zip((1..26).to_a)]
+symbol_AZ = Hash[(:a..:z).to_a.zip((1..26).to_a)]
+string_time = Benchmark.realtime do
+  100_000.times { string_AZ["r"] }
+end
+symbol_time = Benchmark.realtime do
+  100_000.times { symbol_AZ[:r] }
+end
+#symbols are more efficient than key strings
+puts "String time: #{string_time} seconds."
+puts "Symbol time: #{symbol_time} seconds."
+
+
+movie_ratings = {
+  memento: 3,
+  primer: 3.5,
+  the_matrix: 5,
+  truman_show: 4,
+  red_dawn: 1.5,
+  skyfall: 4,
+  alex_cross: 2,
+  uhf: 1,
+  lion_king: 3.5
+}
+good_movies = movie_ratings.select {|k, v| v > 3}
+movie_ratings.each_key { |k| puts k }
+movie_ratings.each_value { |v| puts v }
+
+
+movies = {
+  resident_evil: 5
+}
+puts "Indicate a option (add, update, display or delete): "
+choice = gets.chomp
+case choice
+  when "add"
+    puts "Enter a movie: "
+    title = gets.chomp.downcase.to_sym
+    if movies[title] == nil
+      puts "Enter a rating for the movie: "
+      rating = gets.chomp.to_i
+      movies[title] = rating
+      puts "Added !!"
+    else
+      puts "Movie already exist!" 
+    end
+  when "update"
+    puts "Enter a movie title to update: "
+    title = gets.chomp.downcase.to_sym
+    if movies[title] == nil
+      puts "The movie doesn't exist"
+    else
+      puts "Enter a new rating for the movie: "
+      rating = gets.chomp.to_i
+      movies[title] = rating
+      puts "Updated !!"
+    end
+  when "display"
+    movies.each do |movie, rating|
+      puts "#{movie}: #{rating}"
+    end
+  when "delete"
+    puts "Enter a movie title to delete: "
+    title = gets.chomp.downcase.to_sym
+    if movies[title] == nil
+      puts "The movie doesn't exist"
+    else
+      movies.delete(title)
+      puts "Deleted !!"
+    end
+  else 
+    puts "Error!"
+end
+puts movies

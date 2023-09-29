@@ -1,0 +1,81 @@
+
+## Arrays and Hashes 
+
+demo_array = [100, 200, 300, 400, 500]
+print demo_array[2]
+
+
+string_array = ["Josue", "Bravo", "Huaman"]
+
+
+multi_d_array = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+multi_d_array.each { |x| puts "#{x}\n" }
+
+
+my_hash = { 
+    "name" => "Eric",
+    "age" => 26,
+    "hungry?" => true
+}
+
+puts my_hash["name"]
+puts my_hash["age"]
+puts my_hash["hungry?"]
+
+
+pets = Hash.new
+pets["dog"] = "Brisa y Snow"
+
+
+friends = ["Milhouse", "Ralph", "Nelson", "Otto"]
+family = { "Homer" => "dad",
+  "Marge" => "mom",
+  "Lisa" => "sister",
+  "Maggie" => "sister",
+  "Abe" => "grandpa",
+  "Santa's Little Helper" => "dog"
+}
+friends.each { |x| puts "#{x}" }
+family.each { |x, y| puts "#{x}: #{y}" }
+
+
+languages = ["HTML", "CSS", "JavaScript", "Python", "Ruby"]
+languages.each { |lang| puts lang }
+
+
+s = [["ham", "swiss"], ["turkey", "cheddar"], ["roast beef", "gruyere"]]
+s.each do |item_x|
+  item_x.each do |item_y|
+    puts item_y
+  end
+end
+
+
+secret_identities = {
+    "The Batman" => "Bruce Wayne",
+    "Superman" => "Clark Kent",
+    "Wonder Woman" => "Diana Prince",
+    "Freakazoid" => "Dexter Douglas"
+}
+
+secret_identities.each do |superheroe, name|
+    puts "#{superheroe}: #{name}"
+end
+
+
+puts "Enter a text: "
+text = gets.chomp
+
+words = text.split(" ")
+frequencies = Hash.new(0)
+words.each do |x| 
+  frequencies[x] += 1
+end
+frequencies = frequencies.sort_by do |key, value| 
+  value
+end
+frequencies.reverse!
+
+frequencies.each do |key, value| 
+  puts key + " " + value.to_s
+end

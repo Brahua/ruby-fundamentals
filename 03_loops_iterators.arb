@@ -1,0 +1,66 @@
+
+## Loops & Iterators in Ruby
+
+counter = 1
+while counter < 11
+  puts counter
+  counter = counter + 1
+end
+
+
+counter = 1
+until counter > 10
+  puts counter
+  # Add code to update 'counter' here!
+  counter +=1
+end
+
+
+for num in 1...10
+    puts num
+end
+
+
+for num in 1..15
+    puts num
+end
+
+
+i = 20
+loop do
+  i -= 1
+  next if i % 2 != 0
+  puts "#{i}"
+  break if i <= 0
+end
+
+
+array = [1,2,3,4,5]
+array.each do |x|
+  x += 10
+  puts "#{x}"
+end
+
+
+odds = [1,3,5,7,9]
+odds.each { |num| print "#{num*2}"}
+
+
+16.times { print "I love you <3" }
+
+
+puts "Text to search through: "
+text = gets.chomp
+
+puts "Word to redact: "
+redact = gets.chomp
+
+words = text.split(" ")
+
+words.each do |letter|
+  if letter == redact
+    print "REDACTED"
+  else
+    print "#{letter} "
+  end
+end
